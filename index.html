@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Видео-упаковка и система клипов для сообщества ЦветоНоткино</title>
+  <meta name="description" content="Персональное предложение по видео-упаковке и системе коротких клипов для сообщества ЦветоНоткино." />
+  <meta property="og:title" content="Видео-упаковка и система клипов для сообщества ЦветоНоткино" />
+  <meta property="og:description" content="Персональное предложение по видео-упаковке и системе коротких клипов для сообщества ЦветоНоткино." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+      --text-2xl: clamp(2.3rem, 1.1rem + 4vw, 4.7rem);
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+
+      --color-bg: #f7f5f0;
+      --color-surface: #fcfbf8;
+      --color-surface-2: #f1ede5;
+      --color-surface-3: #e8f2f1;
+      --color-border: rgba(34, 32, 28, 0.1);
+      --color-divider: rgba(34, 32, 28, 0.08);
+      --color-text: #22201c;
+      --color-text-muted: #6f6a62;
+      --color-primary: #0d696e;
+      --color-primary-soft: #dceceb;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-xl: 34px;
+      --shadow-sm: 0 8px 24px rgba(32, 28, 22, 0.05);
+      --shadow-lg: 0 18px 50px rgba(32, 28, 22, 0.08);
+      --content: 1120px;
+      --content-narrow: 760px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 105, 110, 0.06), transparent 28%),
+        linear-gradient(180deg, #fbfaf7 0%, var(--color-bg) 100%);
+      color: var(--color-text);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(calc(100% - 28px), var(--content));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 245, 240, 0.78);
+      border-bottom: 1px solid transparent;
+      transition: border-color 180ms ease, background 180ms ease;
+    }
+
+    .site-header.scrolled {
+      border-color: var(--color-divider);
+      background: rgba(247, 245, 240, 0.92);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--color-primary-soft), #f4fbfb);
+      border: 1px solid rgba(13,105,110,0.14);
+      display: grid;
+      place-items: center;
+      color: var(--color-primary);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 18px;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--color-primary);
+      color: white;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero {
+      padding: clamp(42px, 9vw, 98px) 0 var(--space-12);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: var(--space-6);
+      align-items: end;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .panel,
+    .card,
+    .package,
+    .cta-box,
+    .process-step,
+    .note {
+      border: 1px solid var(--color-border);
+      background: rgba(252, 251, 248, 0.82);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-copy {
+      border-radius: var(--radius-xl);
+      padding: clamp(24px, 5vw, 42px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(13, 105, 110, 0.07);
+      color: var(--color-primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--color-primary);
+    }
+
+    h1, h2, h3, h4, p { margin: 0; }
+    h1 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: var(--text-2xl);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      max-width: 11ch;
+      margin-bottom: 18px;
+    }
+
+    .lead {
+      max-width: 44ch;
+      color: #2f2c27;
+      font-size: var(--text-lg);
+      line-height: 1.5;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn,
+    .btn-secondary {
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .btn {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(13, 105, 110, 0.06);
+      color: var(--color-primary);
+      border: 1px solid rgba(13, 105, 110, 0.14);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f2f8f8;
+      color: var(--color-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .price {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .price-sub {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      margin-top: 6px;
+    }
+
+    .hero-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .hero-list li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #292620;
+      font-size: var(--text-sm);
+    }
+
+    .hero-list li::before {
+      content: "✦";
+      color: var(--color-primary);
+      font-size: 15px;
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+
+    .section {
+      padding: 0 0 var(--space-10);
+    }
+
+    .section-head {
+      max-width: var(--content-narrow);
+      margin-bottom: 20px;
+    }
+
+    .section-kicker {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .section-desc {
+      color: var(--color-text-muted);
+      max-width: 55ch;
+    }
+
+    .diagnostic-grid,
+    .packages,
+    .metrics,
+    .process-grid,
+    .delivery-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .panel,
+    .card,
+    .package,
+    .cta-box,
+    .process-step,
+    .note {
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+
+    .panel h3,
+    .card h3,
+    .package h3,
+    .process-step h3,
+    .delivery-grid h3 {
+      font-size: var(--text-lg);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .muted {
+      color: var(--color-text-muted);
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .list li::before {
+      content: "•";
+      color: var(--color-primary);
+      font-size: 20px;
+      line-height: 1;
+      margin-top: -1px;
+    }
+
+    .opportunity {
+      background: linear-gradient(180deg, #f5fbfb 0%, var(--color-surface-3) 100%);
+      border-color: rgba(13, 105, 110, 0.16);
+    }
+
+    .metric-pill-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .metric-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(13, 105, 110, 0.06);
+      border: 1px solid rgba(13, 105, 110, 0.12);
+      color: #28585b;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .featured {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #ffffff 0%, #f6fbfb 100%);
+      border-color: rgba(13, 105, 110, 0.16);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .featured::after {
+      content: "рекомендуемый старт";
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--color-primary);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .package-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .package-price {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+
+    .package-note {
+      margin-top: 8px;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .subgrid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: white;
+      border: 1px solid var(--color-border);
+    }
+
+    .mini h4 {
+      font-size: var(--text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: 10px;
+    }
+
+    .mini ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+      font-size: var(--text-sm);
+    }
+
+    .mini li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .mini li::before {
+      content: "↳";
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .package-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .process-grid {
+      counter-reset: steps;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .process-step::before {
+      counter-increment: steps;
+      content: counter(steps);
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(13, 105, 110, 0.08);
+      color: var(--color-primary);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .cta-box {
+      background: linear-gradient(180deg, #ffffff 0%, #f2f9f9 100%);
+      border-color: rgba(13, 105, 110, 0.16);
+    }
+
+    .cta-box .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .note {
+      background: rgba(255,255,255,0.62);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    footer {
+      padding: var(--space-8) 0 var(--space-12);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    @media (min-width: 820px) {
+      .nav-links { display: inline-flex; }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+      }
+      .diagnostic-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .metrics {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      .package-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      .packages {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .process-grid,
+      .delivery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-copy,
+      .hero-card,
+      .panel,
+      .card,
+      .package,
+      .cta-box,
+      .process-step,
+      .note {
+        animation: rise 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+      .hero-card { animation-delay: 80ms; }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="shell nav">
+      <a href="#top" class="brand" aria-label="К началу страницы">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5H19M5 12H16M5 16.5H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span>ЦветоНоткино — сайт‑КП</span>
+      </a>
+      <nav class="nav-links" aria-label="Навигация по странице">
+        <a href="#diagnostic">Диагностика</a>
+        <a href="#packages">Форматы</a>
+        <a href="#process">Процесс</a>
+      </nav>
+      <a class="nav-cta" href="#start">Выбрать старт</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Персональное предложение</div>
+          <h1>Видео‑упаковка и система клипов для сообщества ЦветоНоткино</h1>
+          <p class="lead">Сайт‑предложение по развитию видео‑контента: от сильного входного welcome‑формата до системной работы с короткими клипами, которые усиливают восприятие эксперта и делают сообщество более живым и понятным.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#start">Посмотреть рекомендуемый старт</a>
+            <a class="btn-secondary" href="#diagnostic">Открыть диагностику</a>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Ключевое предложение">
+          <div class="hero-card-top">
+            <span class="tag">Основной акцент</span>
+            <span class="tag">3 ролика</span>
+          </div>
+          <div>
+            <div class="price">7000 ₽</div>
+            <div class="price-sub">Welcome‑проект с личной съемкой как самый быстрый и понятный старт</div>
+          </div>
+          <ul class="hero-list">
+            <li>Помогает быстро собрать базовую видео‑упаковку сообщества.</li>
+            <li>Объясняет, кто вы, для кого проект и с чего лучше начинать.</li>
+            <li>Создает готовую связку роликов для первого впечатления и входа в диалог.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="context">
+      <div class="shell metrics">
+        <div class="panel">
+          <div class="section-kicker">Контекст</div>
+          <h2>Проект уже выглядит сильным на уровне смыслов</h2>
+          <p class="section-desc">Сообщество считывается как экспертный проект с четким позиционированием: не просто обучение музыке, а системный подход для педагогов и детских центров, где музыка становится частью устойчивой модели роста.</p>
+        </div>
+        <div class="card">
+          <h3>Что уже работает</h3>
+          <div class="metric-pill-wrap">
+            <span class="metric-pill">Сильные тексты</span>
+            <span class="metric-pill">Ясное позиционирование</span>
+            <span class="metric-pill">Понятная продуктовая логика</span>
+            <span class="metric-pill">Кейсы и цифры</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diagnostic">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-kicker">Диагностика сообщества</div>
+          <h2>Сильные стороны, зоны роста и возможности через видео</h2>
+          <p class="section-desc">Формулировки ниже собраны конструктивно: задача не критиковать, а показать, где видео может усилить уже существующую экспертную базу.</p>
+        </div>
+
+        <div class="diagnostic-grid">
+          <article class="panel">
+            <h3>Сильные стороны</h3>
+            <ul class="list">
+              <li>У сообщества уже есть сильная текстовая основа и ясное позиционирование.</li>
+              <li>Хорошо считывается продуктовая логика: диагностика, курс, методика, сопровождение.</li>
+              <li>Есть кейсы, цифры и аргументы, которые усиливают доверие.</li>
+            </ul>
+          </article>
+
+          <article class="panel">
+            <h3>Зоны роста</h3>
+            <ul class="list">
+              <li>Длинные тексты дают глубину, но на первом касании могут считываться тяжело.</li>
+              <li>Видео и визуал пока не в полной мере передают масштаб эксперта.</li>
+              <li>Кейсы и цифры еще не упакованы в короткий пересылаемый формат.</li>
+            </ul>
+          </article>
+
+          <article class="panel opportunity">
+            <h3>Возможности через видео</h3>
+            <ul class="list">
+              <li>Сделать более быстрый и понятный вход для новой аудитории.</li>
+              <li>Регулярно усиливать ключевые смыслы проекта через короткие ролики.</li>
+              <li>Перевести экспертность, кейсы и цифры в формат, которым удобно делиться.</li>
+              <li>Сделать сообщество более живым и лучше подготовленным к заявкам.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-kicker">Что решает видео‑система</div>
+          <h2>Не просто монтаж роликов, а понятная упаковка сильных смыслов</h2>
+        </div>
+        <div class="card">
+          <div class="metric-pill-wrap">
+            <span class="metric-pill">Welcome‑цепочка для нового подписчика</span>
+            <span class="metric-pill">Быстрый вход в суть проекта</span>
+            <span class="metric-pill">Регулярные короткие клипы</span>
+            <span class="metric-pill">Упаковка кейсов и цифр</span>
+            <span class="metric-pill">Более живое восприятие эксперта</span>
+            <span class="metric-pill">Усиление пути к покупке</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="start">
+      <div class="shell package-grid">
+        <article class="package featured">
+          <div class="package-head">
+            <div>
+              <div class="section-kicker">Рекомендуемый старт</div>
+              <h2>Welcome‑проект с личной съемкой</h2>
+              <p class="section-desc">Оптимальный первый шаг, если задача — быстро и без перегруза собрать базовую видео‑упаковку сообщества, которая начнет работать на первое впечатление и понимание проекта.</p>
+            </div>
+            <div>
+              <div class="package-price">7000 ₽</div>
+            </div>
+          </div>
+
+          <div class="subgrid">
+            <div class="mini">
+              <h4>Что входит</h4>
+              <ul>
+                <li>Предварительное согласование задач и смыслов.</li>
+                <li>Разработка структуры 3 роликов.</li>
+                <li>Подсказки по подаче, формулировкам и записи.</li>
+                <li>Личная съемка в вашем центре.</li>
+                <li>Монтаж 3 welcome‑роликов.</li>
+                <li>Базовое оформление под VK.</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h4>Какие ролики предлагаются</h4>
+              <ul>
+                <li>Кто вы, для кого это сообщество и с чем сюда приходят.</li>
+                <li>Что дает диагностика и в каком случае она особенно нужна.</li>
+                <li>С чего лучше начать работу с вами и какой продукт решает какую задачу.</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h4>Как проходит</h4>
+              <ul>
+                <li>Съемка проходит в вашем центре в удобное время, например после занятий.</li>
+                <li>На съемку всей серии закладывается около 1 часа.</li>
+                <li>Через 3 дня после съемки вы получаете готовые ролики.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <aside class="note">
+          <h3>Почему именно этот формат стоит продавать первым</h3>
+          <p>Он дает быстрый и понятный результат: не требует длинного входа в работу, помогает сразу сделать видео‑основу для сообщества и создает понятную точку входа для дальнейшей системной работы.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="packages">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-kicker">Другие форматы сотрудничества</div>
+          <h2>Можно начать с небольшого формата или сразу перейти к системе</h2>
+        </div>
+
+        <div class="packages">
+          <article class="package">
+            <div class="package-head">
+              <div>
+                <h3>Welcome‑пакет без офлайн‑съемки</h3>
+                <p class="muted">Подходит, если удобнее записать ролики самостоятельно.</p>
+              </div>
+              <div class="package-price">4500 ₽</div>
+            </div>
+            <ul class="list">
+              <li>Сценарии для 3 роликов.</li>
+              <li>Рекомендации по кадру, свету, звуку и подаче.</li>
+              <li>Монтаж роликов из ваших исходников.</li>
+              <li>Оформление под публикацию.</li>
+            </ul>
+          </article>
+
+          <article class="package opportunity">
+            <div class="package-head">
+              <div>
+                <h3>Системная работа на месяц</h3>
+                <p class="muted">Формат для регулярного видео‑контента и устойчивой контент‑системы.</p>
+              </div>
+              <div class="package-price">18 000 ₽</div>
+            </div>
+            <ul class="list">
+              <li>20 сценариев коротких роликов на месяц.</li>
+              <li>До 20 роликов в месяц.</li>
+              <li>Монтаж, титры и базовое оформление.</li>
+              <li>Подготовка файлов к публикации.</li>
+              <li>По запросу — постинг в сообщество.</li>
+              <li>Ежемесячный отчет и 1 созвон / сверка.</li>
+            </ul>
+            <p class="package-note">Тестовая цена на первый месяц — 15 000 ₽</p>
+          </article>
+
+          <article class="package">
+            <div class="package-head">
+              <div>
+                <h3>Работа по запросу</h3>
+                <p class="muted">Точечные задачи без полноценного ежемесячного пакета.</p>
+              </div>
+            </div>
+            <ul class="list">
+              <li>1 ролик по вашему сценарию и исходникам — 700 ₽</li>
+              <li>1 ролик по моему сценарию и вашим исходникам — 1000 ₽</li>
+            </ul>
+          </article>
+
+          <article class="package">
+            <div class="package-head">
+              <div>
+                <h3>Стратегия на 20 клипов отдельно</h3>
+                <p class="muted">Если сначала хочется выстроить логику видео‑контента, а уже потом запускать производство.</p>
+              </div>
+              <div class="package-price">7000 ₽</div>
+            </div>
+            <ul class="list">
+              <li>20 тем роликов.</li>
+              <li>Рубрики и смысловые акценты.</li>
+              <li>Крючки и логика подачи.</li>
+              <li>Привязка к позиционированию и продуктам сообщества.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="shell">
+        <div class="section-head">
+          <div class="section-kicker">Как строится работа</div>
+          <h2>Понятный процесс без лишней организационной нагрузки</h2>
+        </div>
+        <div class="process-grid">
+          <article class="process-step">
+            <div>
+              <h3>Согласование</h3>
+              <p class="muted">Определяем формат сотрудничества и ближайшую задачу.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div>
+              <h3>Сценарии и структура</h3>
+              <p class="muted">Утверждаем темы, смыслы и логику роликов.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div>
+              <h3>Съемка или запись</h3>
+              <p class="muted">Проводим съемку вместе или вы записываете материалы по рекомендациям.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div>
+              <h3>Монтаж и передача</h3>
+              <p class="muted">Готовые ролики оформляются и передаются удобным способом.</p>
+            </div>
+          </article>
+          <article class="process-step">
+            <div>
+              <h3>Корректировка</h3>
+              <p class="muted">При системной работе сверяемся по результатам месяца и корректируем следующие темы.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell delivery-grid">
+        <article class="card">
+          <h3>Передача материалов</h3>
+          <p class="muted">Готовые видео могут передаваться удобным способом, в том числе через Яндекс Диск. Если нужен только монтаж и подготовка файлов, работа строится через передачу исходников и готовых роликов. Если нужен постинг, он может подключаться отдельно по запросу.</p>
+        </article>
+        <article class="card">
+          <h3>Что входит в отчет</h3>
+          <ul class="list">
+            <li>Количество опубликованных роликов.</li>
+            <li>Просмотры и воспроизведения.</li>
+            <li>Доступные показатели вовлечения внутри VK.</li>
+            <li>Какие темы и форматы сработали лучше.</li>
+            <li>Рекомендации по следующим роликам и рубрикам.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="cta-box">
+          <div class="section-kicker">Предлагаемый старт</div>
+          <h2>Оптимально начать с welcome‑проекта на 3 ролика</h2>
+          <p class="section-desc">Это быстрый и предметный способ собрать базовую видео‑упаковку сообщества, проверить, как формат работает на восприятие и вход новой аудитории, а затем при желании расширить работу в системный ежемесячный формат.</p>
+          <div class="btn-row">
+            <a class="btn" href="#top">Вернуться к началу</a>
+            <a class="btn-secondary" href="https://disk.yandex.ru/d/AjU91G-LLzXuDg" target="_blank" rel="noopener noreferrer">Открыть портфолио</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      Подготовлено как персональное сайт‑КП для сообщества «ЦветоНоткино». Формат оптимизирован под просмотр с телефона и отправку ссылкой.
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector('.site-header');
+    const onScroll = () => {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+</body>
+</html>
